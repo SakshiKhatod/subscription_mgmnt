@@ -1,17 +1,30 @@
-import constants
-class Final_Subscription:
-    def __init__(self) -> None:
-        __start_date_of_subscription=""
-        __subscriptionlist=constants.SUBSCRIPTION_CATEGORY_PLAN_MAPPING
-        __subscription_status=constants.SUBSCRIPTION_STATUS
-        __topup_status=None
-        __no_of_months_for_topup=0
-        __device_type=constants.DEVICE_TYPE
+from services.command_line import CommandLine
 
-    def doremi_subscription(self):
-        __start_date_of_subscription=""
-        __subscriptionlist=constants.SUBSCRIPTION_CATEGORY_PLAN_MAPPING
-        __subscription_status=constants.SUBSCRIPTION_STATUS[2]
-        __topup_status=None
-        __no_of_months_for_topup=0
-        __device_type=constants.DEVICE_TYPE
+
+def main():
+    processor = CommandLine()
+    file_path = "sample_input/input2.txt"
+    with open(file_path, "r") as file:
+        for line in file:
+            commands = line.strip().split()
+            if not commands:
+                continue
+            command = commands[0]
+            if command == "START_SUBSCRIPTION":
+                result = processor.validate_date(commands[1])
+                if result:
+                    print(result)
+            elif command == "ADD_SUBSCRIPTION":
+                result = processor.add_subscription(commands[1], commands[2])
+                if result:
+                    print(result)
+            elif command == "ADD_TOPUP":
+                result = processor.add_topup(commands[1], int(commands[2]))
+                if result:
+                    print(result)
+            elif command == "PRINT_RENEWAL_DETAILS":
+                print(processor.calculate_renewal_details())
+
+
+if __name__ == "__main__":
+    main()
