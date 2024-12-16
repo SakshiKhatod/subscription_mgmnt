@@ -12,3 +12,5 @@ class Subscription:
         return SUBSCRIPTION_COSTS.get(self.subscription_category, {}).get(
             self.subscription_plan, 0
         )
+
+
