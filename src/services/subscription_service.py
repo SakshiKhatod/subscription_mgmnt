@@ -1,4 +1,4 @@
-from constants.error_codes import ErrorCodes
+from subscription_mgmnt.constants.error_codes import ErrorCodes
 from models.plan import Plan
 from models.subscription import Subscription
 from enums.subscription_category import SubscriptionCategory
