@@ -1,45 +1,9 @@
-# import unittest
-# from src.services.renewal_service import RenewalService
-# from src.models.subscription import Subscription
-# from datetime import datetime
-# from src.enums.subscription_category import SubscriptionCategory
-# from src.enums.plan_type import PlanType
-
-
-# class TestRenewalService(unittest.TestCase):
-
-#     def setUp(self):
-
-#         self.subscription = Subscription("01-01-2022")
-#         self.renewal_service = RenewalService(self.subscription)
-
-#     def test_calculate_renewal_date(self):
-
-#         renewal_date = self.renewal_service.calculate_renewal_dates()
-#         expected_renewal_date = "01-02-2022"
-#         self.assertEqual(renewal_date, expected_renewal_date)
-
-#     def test_calculate_total_renewal_amount(self):
-
-#         # Assuming subscription and topup services have been set up properly
-#         self.subscription.add_subscription(
-#             SubscriptionCategory.MUSIC, PlanType.PERSONAL
-#         )
-#         self.subscription.add_topup("FOUR_DEVICE")
-#         renewal_amount = self.renewal_service.calculate_total_cost()
-#         expected_amount = 100 + 50
-#         self.assertEqual(renewal_amount, expected_amount)
-
-
-# if __name__ == "__main__":
-#     unittest.main()
-
 import unittest
-from models.subscription import Subscription
-from services.renewal_service import RenewalService
-from enums.subscription_category import SubscriptionCategory
-from models.plan import Plan
-from enums.plan_type import PlanType
+from src.models.subscription import Subscription
+from src.services.renewal_service import RenewalService
+from src.enums.subscription_category import SubscriptionCategory
+from src.models.plan import Plan
+from src.enums.plan_type import PlanType
 
 import sys
 import os
@@ -69,9 +33,7 @@ class TestRenewalService(unittest.TestCase):
     def test_get_renewal_details(self):
         details = self.service.get_renewal_details()
         self.assertIn("RENEWAL_REMINDER MUSIC 10-03-2022", details)
-        self.assertIn(
-            "RENEWAL_AMOUNT 100", details
-        )  # Replace 100 with actual total cost
+        self.assertIn("RENEWAL_AMOUNT 100", details)
 
 
 if __name__ == "__main__":

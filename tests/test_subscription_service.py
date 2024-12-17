@@ -36,11 +36,11 @@
 # if __name__ == "__main__":
 #     unittest.main()
 import unittest
-from models.subscription import Subscription
-from services.subscription_service import SubscriptionService
-from enums.subscription_category import SubscriptionCategory
-from enums.plan_type import PlanType
-from constants.error_codes import ErrorCodes
+from src.models.subscription import Subscription
+from src.services.subscription_service import SubscriptionService
+from src.enums.subscription_category import SubscriptionCategory
+from src.enums.plan_type import PlanType
+from src.constants.error_codes import ErrorCodes
 
 import sys
 import os
@@ -64,7 +64,9 @@ class TestSubscriptionService(unittest.TestCase):
 
     def test_add_subscription_duplicate(self):
         self.service.add_subscription(SubscriptionCategory.MUSIC, PlanType.PERSONAL)
-        result = self.service.add_subscription(SubscriptionCategory.MUSIC, PlanType.PREMIUM)
+        result = self.service.add_subscription(
+            SubscriptionCategory.MUSIC, PlanType.PREMIUM
+        )
         self.assertEqual(result, ErrorCodes.DUPLICATE_CATEGORY)
 
     def test_add_subscription_invalid_category(self):
