@@ -3,11 +3,10 @@ from constants.error_codes import ErrorCodes
 
 
 class Topup:
-    def __init__(self, topup_type: str, months: int):
+    def __init__(self, topup_type: TopupType, months: int):
         self.topup_type = topup_type
-        if not isinstance(topup_type, TopupType):
+        if topup_type.name not in TopupType.__members__:
             raise ValueError(ErrorCodes.INVALID_TOPUP_TYPE)
-
         details = topup_type.get_details()
         self.duration = details["duration"] * months
         self.devices = details["devices"]

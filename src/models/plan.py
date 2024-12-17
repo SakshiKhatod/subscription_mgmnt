@@ -6,18 +6,23 @@ from constants.error_codes import ErrorCodes
 
 class Plan:
     def __init__(self, plan_type: PlanType, category: SubscriptionCategory):
-        if not isinstance(plan_type, PlanType):
+        if plan_type.name not in PlanType.__members__:
             raise ValueError(ErrorCodes.INVALID_PLAN_TYPE)
-        if not isinstance(category, SubscriptionCategory):
-            return ErrorCodes.INVALID_CATEGORY
-        plan_details = PLAN_DETAILS[category][plan_type]
+        if category.name not in SubscriptionCategory.__members__:
+            raise ValueError(ErrorCodes.INVALID_CATEGORY)
+
+        try:
+            plan_details = PLAN_DETAILS[category][plan_type]
+        except KeyError:
+            raise ValueError(ErrorCodes.INVALID_PLAN_DETAILS_MAPPING)
+
         self.category = category
         self.plan_type = plan_type
         self.cost = plan_details["cost"]
         self.duration = plan_details["duration"]
 
     def get_details(self):
-        print(self.category.name, self.plan_type.name, self.cost, self.duration)
+        """Return plan details in a dictionary format."""
         return {
             "category": self.category.name,
             "plan_type": self.plan_type.name,
