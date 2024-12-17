@@ -17,6 +17,7 @@ class Plan:
         self.duration = plan_details["duration"]
 
     def get_details(self):
+        print(self.category.name, self.plan_type.name, self.cost, self.duration)
         return {
             "category": self.category.name,
             "plan_type": self.plan_type.name,

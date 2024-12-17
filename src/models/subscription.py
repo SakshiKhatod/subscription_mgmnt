@@ -1,9 +1,3 @@
-from datetime import datetime
-from services.subscription_service import SubscriptionService
-from services.topup_service import TopupService
-from constants.error_codes import ErrorCodes
-
-
 class Subscription:
 
     def __init__(self, start_date: str):
@@ -19,9 +13,3 @@ class Subscription:
 
     def has_active_subscriptions(self):
         return len(self.plans) > 0
-        # try:
-        #     self.start_date = datetime.strptime(start_date,"%d-%m-%Y")
-        # except ValueError:
-        #     raise ValueError(ErrorCodes.INVALID_DATE)
-        # self.subscription_service=SubscriptionService()
-        # self.topup_service=TopupService()
